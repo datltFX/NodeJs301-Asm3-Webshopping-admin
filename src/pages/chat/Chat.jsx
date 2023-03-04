@@ -19,10 +19,7 @@ function Chat(props) {
   //get list roomchat
   useEffect(() => {
     axiosClient
-      .get(`/chat/roomOpen`, {
-        withCredentials: true,
-        credentials: "include",
-      })
+      .get(`/chat/roomOpen`)
       .then((res) => {
         // console.log(res.data);
         setListChat(res.data);

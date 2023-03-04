@@ -18,9 +18,10 @@ const Login = () => {
       .post("/login", data)
       .then((res) => {
         // console.log(res.data);
-        const user = res.data;
+        const user = res.data.user;
         if (user.role === "admin") {
           localStorage.setItem("userActive", JSON.stringify(user));
+          localStorage.setItem("accessToken", res.data.accessToken);
           navigate("/products");
         } else if (user.role === "counselors") {
           navigate("/chat");

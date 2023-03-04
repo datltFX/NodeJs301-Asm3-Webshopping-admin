@@ -32,7 +32,7 @@ function Products(props) {
     axiosClient
       .post("/products/search", data)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setProducts(res.data);
       })
       .catch((err) => console.log(err));

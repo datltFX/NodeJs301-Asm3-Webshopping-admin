@@ -6,27 +6,22 @@ import MessageIcon from "@mui/icons-material/Message";
 import DevicesIcon from "@mui/icons-material/Devices";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { red } from "@mui/material/colors";
-import axiosClient from "../axios/axios";
 
 function Sidebar(props) {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ role: "admin" });
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const loadUser = JSON.parse(localStorage.getItem("userActive"));
     if (!loadUser) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/" />;
     }
     setUser(loadUser);
   }, []);
-  const handleLogout = async () => {
-    axiosClient
-      .post("/logout", "")
-      .then((res) => {
-        localStorage.clear();
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
   };
   //render
   return (
