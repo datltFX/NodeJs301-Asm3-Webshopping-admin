@@ -6,6 +6,7 @@ import MessageIcon from "@mui/icons-material/Message";
 import DevicesIcon from "@mui/icons-material/Devices";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { red } from "@mui/material/colors";
+import axiosClient from "../axios/axios";
 
 function Sidebar(props) {
   const navigate = useNavigate();
@@ -20,8 +21,13 @@ function Sidebar(props) {
   }, []);
 
   const handleLogout = () => {
-    localStorage.clear();
-    navigate("/");
+    axiosClient
+      .post(`/logout`, { content: "bye" })
+      .then((res) => {
+        localStorage.clear();
+        navigate("/");
+      })
+      .catch((err) => console.log(err.response.data));
   };
   //render
   return (

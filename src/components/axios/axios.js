@@ -2,16 +2,13 @@ import axios from "axios";
 const axiosClient = axios.create({
   baseURL: "https://asm3-webshopping.onrender.com",
   // baseURL: "http://localhost:5000",
+  // baseURL: "  https://grandiose-curious-shop.glitch.me",
+
   headers: {
     "content-type": "application/json",
   },
+  withCredentials: true,
+  credentials: "include",
 });
-axiosClient.interceptors.request.use(async (config) => {
-  // Handle token here ...
-  const token = localStorage.getItem("accessToken");
-  if (token) {
-    config.headers["Authorization"] = "Bearer " + token;
-  }
-  return config;
-});
+
 export default axiosClient;

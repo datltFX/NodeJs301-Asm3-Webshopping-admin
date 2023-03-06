@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { pink } from "@mui/material/colors";
+import axiosClient from "../axios/axios";
 
 function Header(props) {
   const [user, setUser] = useState({});
@@ -17,8 +18,13 @@ function Header(props) {
   }, []);
 
   const handleLogout = () => {
-    localStorage.clear();
-    navigate("/");
+    axiosClient
+      .post(`/logout`, { content: "bye" })
+      .then((res) => {
+        localStorage.clear();
+        navigate("/");
+      })
+      .catch((err) => console.log(err.response.data));
   };
 
   return (
